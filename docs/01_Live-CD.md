@@ -10,7 +10,7 @@ boot > gentoo
 During the boot process, select the **keyboard layout** of your liking, e.g. `10` for German. When boot process has finished, check whether the **network interfaces** have already been brought up:
 
 ```sh
-/sbin/ifconfig
+ifconfig
 ```
 
 Manually **configure your interface(s)** in case the automatic setup has failed. You can find your interface names like `eth0` or `enp9s0` in the output of `ifconfig`:
@@ -37,8 +37,11 @@ More recent Live CDs require you to **enable root access via SSH** in `/etc/ssh/
 PermitRootLogin yes
 ```
 
-**Fire up the SSH service**, log in with PuTTY using `root` as username and your password. Continue [setting up the hard drives](02_Hard-Drives.md) via SSH.
+**Fire up the SSH service** and log in with PuTTY using `root` as username and your password.
 
 ```sh
 /etc/init.d/sshd start
 ```
+
+___
+Continue [setting up the hard drives](02_Hard-Drives.md) via SSH.
