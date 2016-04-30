@@ -44,4 +44,4 @@ PermitRootLogin yes
 ```
 
 ___
-Continue [setting up the hard drives](02_Hard-Drives.md) via SSH.
+Continue via SSH by [setting up the hard drives](02_Hard-Drives.md) (if this is a new install) or `chroot`ing into your system if you need to [troubleshoot something](03_Installation/05_Finish.md#troubleshooting).

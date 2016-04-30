@@ -79,9 +79,10 @@ Mount the `/proc` file system:
 mount -t proc none /mnt/gentoo/proc
 ```
 
-Copy over the DNS server info
+Copy over the network interface configuration (and DNS server info
 
 ```sh
+cp /etc/conf.d/net /mnt/gentoo/conf.d/net
 cp /etc/resolv.conf /mnt/gentoo/etc
 ```
 
