@@ -4,3 +4,4 @@
 2. [Hard Drives](docs/02_Hard-Drives.md)
 3. Installation
     1. [System Sources](docs/installation/01_System-Sources.md)
+    2. [Kernel Installation)(docs/installation/02_Kernel.md)
