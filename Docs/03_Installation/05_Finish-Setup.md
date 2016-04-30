@@ -27,3 +27,6 @@ env-update
 source /etc/profile
 export PS1="(chroot) $PS1"
 ```
+
+___
+Now that your new Gentoo box is up and running, you will want to [install some Software](../04_Software/01_Overview.md) on it.
