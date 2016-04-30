@@ -107,4 +107,4 @@ swapon /dev/sda2
 ```
 
 ___
-Continue by [installing the System Sources](installation/01_System-Sources.md).
+Continue by [installing the System Sources](03_Installation/01_System-Sources.md).
