@@ -1,5 +1,5 @@
-Shared Webhosting
-=================
+Shared Webhosting Setup
+=======================
 
 We mostly use our Gentoo boxes for hosting multiple web projects / accounts simultaneously. The necessary infrastructure mostly lives on the `/www` partition:
 
@@ -25,7 +25,7 @@ The directory `/www/vhtdocs` contains the web accounts, each of them in a separa
 
 For each of the accounts there's also a directory below `/www/accounts` containing the corresponding configuration files:
 
-* `vhost.conf` contains the [Apache](../04_Software/05_Apache-PHP.md#Installation) Virtual Host definition
+* `vhost.conf` contains the [Apache](../04_Software/05_Apache-PHP.md#installation) Virtual Host definition
 * `fpm-*.conf` contains the [PHP-FPM pool](../04_Software/05_Apache-PHP.md#php-pool-manager-configuration) definition. The filename decides which pool manager / PHP version to use. There may only be one pool definition per account.
 * `letsencrypt.ini` contains all information necessary for issuing [Let's Encrypt](../04_Software/06_Letsencrypt.md) certificates for this account. 
 

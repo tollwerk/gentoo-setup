@@ -1,5 +1,5 @@
-Software Setup Overview
-=======================
+Software Installation
+=====================
 
 Depending on your needs, you will want to install particular software packages on your system. The following guides mostly focus on a traditional web hosting situation with multiple virtual hosts. There's not necessarily a particular order for installing the different packages.
 

@@ -9,8 +9,7 @@ emerge mysql
 
 Edit the `[mysqld]` section in `/etc/mysql/my.cnf` to look something like this:
 
-```sh
-[mysqld]
+```ini
 [mysqld]
 default-time-zone       = +0:00
 ft_min_word_len           = 3
