@@ -8,3 +8,4 @@ Depending on your needs, you will want to install particular software packages o
 3. [OpenSSL](04_OpenSSL.md)
 4. [Apache / PHP](05_Apache-PHP.md) with Event MPM, HTTP2, PHP-FPM and PHP 7
 5. [Let's Encrypt](06_Letsencrypt.md)
+6. [phpMyAdmin](07_phpMyAdmin.md)

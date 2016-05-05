@@ -16,5 +16,6 @@ This documentation walks you through the steps we usually take for setting up a 
     3. [OpenSSL](Docs/04_Software/04_OpenSSL.md)
     4. [Apache / PHP](Docs/04_Software/05_Apache-PHP.md) with Event MPM, HTTP2, PHP-FPM and PHP 7
     5. [Let's Encrypt](Docs/04_Software/06_Letsencrypt.md)
+    6. [phpMyAdmin](Docs/04_Software/07_phpMyAdmin.md)
 5. Shared hosting
     1. [Webhosting Setup](Docs/05_Shared_Hosting/01_Webhosting.md)

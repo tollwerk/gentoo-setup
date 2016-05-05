@@ -36,59 +36,70 @@ A typical account VHost looks like this:
 
 ```apache
 <VirtualHost *:443>
-        DocumentRoot "/www/vhtdocs/account1"
-        ServerName example.com
-        ServerAlias *.example.com
-        CustomLog /var/log/apache2/access_staging_log combined
+        ServerName mysql.example.com
+        Include /etc/apache2/vhosts.d/default_pma_vhost.include
+        Include /www/accounts/account1/vhost_fpm.include
+        Include /www/accounts/account1/vhost_ssl.include
+</VirtualHost>
 
+<VirtualHost *:443>
         SSLEngine on
-        SSLCertificateKeyFile /etc/letsencrypt/live/example.com/privkey.pem
-        SSLCertificateFile /etc/letsencrypt/live/example.com/cert.pem
-        SSLCertificateChainFile /etc/letsencrypt/live/example.com/chain.pem
         SSLOptions +StdEnvVars +ExportCertData
         SSLVerifyDepth  5
-
-        <Directory "/www/vhtdocs/account1">
-                RewriteEngine on
-                RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
-                RewriteRule .* - [F]
-
-                Options -Indexes +FollowSymLinks
-                AllowOverride All
-                Require all granted
-        </Directory>
-
-        <FilesMatch "\.php$">
-                SetHandler "proxy:unix:///var/run/php-fpm/account1.sock|fcgi://account1/"
-        </FilesMatch>
-
-        <Proxy fcgi://account1/ enablereuse=on max=10>
-        </Proxy>
+        Include /www/accounts/account1/vhost_ssl.include
+        Include /www/accounts/account1/vhost.include
 </VirtualHost>
 
 <VirtualHost *:80>
-        DocumentRoot "/www/vhtdocs/account1"
-        ServerName example.com
-        ServerAlias *.example.com
-        CustomLog /var/log/apache2/access_staging_log combined
-
-        <Directory "/www/vhtdocs/account1">
-                RewriteEngine on
-                RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
-                RewriteRule .* - [F]
-
-                Options -Indexes +FollowSymLinks
-                AllowOverride All
-                Require all granted
-        </Directory>
-
-        <FilesMatch "\.php$">
-                SetHandler "proxy:unix:///var/run/php-fpm/account1.sock|fcgi://account1/"
-        </FilesMatch>
-
-        <Proxy fcgi://account1/ enablereuse=on max=10>
-        </Proxy>
+        Include /www/accounts/account1/vhost.include
 </VirtualHost>
+```
+
+The virtual host uses a couple of auxiliary includes to not repeat itself.
+
+### General vhost properties (`vhost.include`)
+
+There's `vhost.include` for the general host definition:
+
+```Apache
+ServerName example.com
+ServerAlias *.example.com
+CustomLog /var/log/apache2/access_staging_log combined
+DocumentRoot "/www/vhtdocs/account1"
+<Directory "/www/vhtdocs/account1">
+        RewriteEngine on
+        RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
+        RewriteRule .* - [F]
+
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+</Directory>
+
+Include /www/accounts/account1/vhost_fpm.include
+```
+
+### SSL properties (`vhost_ssl.include`)
+
+There's `vhost_ssl.include` for the SSL settings:
+
+```Apache
+SSLCertificateKeyFile /etc/letsencrypt/live/example.com/privkey.pem
+SSLCertificateFile /etc/letsencrypt/live/example.com/cert.pem
+SSLCertificateChainFile /etc/letsencrypt/live/example.com/chain.pem
+```
+
+### PHP properties (`vhost_fpm.include`)
+
+And then there's `vhost_fpm.include` for the PHP settings:
+
+```Apache
+<FilesMatch "\.php$">
+        SetHandler "proxy:unix:///var/run/php-fpm/account1.sock|fcgi://account1/"
+</FilesMatch>
+
+<Proxy fcgi://account1/ enablereuse=on max=10>
+</Proxy>
 ```
 
 PHP pool manager definition (`fpm-*.conf`)

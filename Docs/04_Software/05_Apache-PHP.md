@@ -41,7 +41,7 @@ chown -R apache:apache /www
 Configure Apache to use enable SSL and PHP in `/etc/conf.d/apache2`:
 
 ```sh
-APACHE2_OPTS="-D SSL -D PROXY -D PHP"
+APACHE2_OPTS="-D SSL -D PROXY -D PHP -D HTTP2"
 ```
 
 Ensure that `mod_cgid` is loaded instead of `mod_cgi` in `/etc/apache2/httpd.conf`:
