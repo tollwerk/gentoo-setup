@@ -78,7 +78,7 @@ SSLHonorCipherOrder On
 SSLCompression off
 Header add Strict-Transport-Security "max-age=15768000"
 # Strict-Transport-Security: "max-age=15768000 ; includeSubDomains"
-SSLCipherSuite 'EDH+CAMELLIA:EDH+aRSA:EECDH+aRSA+AESGCM:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH:+CAMELLIA256:+AES256:+CAMELLIA128:+AES128:+SSLv3:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!DSS:!RC4:!SEED:!ECDSA:CAMELLIA256-SHA:AES256-SHA:CAMELLIA128-SHA:AES128-SHA'
+SSLCipherSuite ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256
 
 # Shared hosting
 ServerName localhost
@@ -93,6 +93,8 @@ Listen 443
 Include /www/accounts/*/vhost.conf
 ```
 
+Recent information about **recommended Cipher Suites** can be found at the [Mozilla Wiki](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_configurations).
+
 **Start Apache** and add it to the default runlevel:
 
 ```sh
@@ -106,7 +108,7 @@ Please see the [shared hosting](../05_Shared_Hosting/01_Webhosting.md) section f
 PHP pool manager configuration
 ------------------------------
 
-To use multiple PHP versions and select a particular version for each virtual host, you need to repeat the following steps for each version you want to install (replace `$VERSION` with e.g. `7.0`). 
+To use multiple PHP versions and select a particular version for each virtual host, you need to repeat the following steps for each version you want to install (replace `$VERSION` with e.g. `7.0`).
 
 First, **configure the pool manager** by adapting its values in `/etc/php/fpm-php$VERSION/php-fpm.conf`. By default, the pool manager will consider all pool definitions matching `/etc/php/fpm-php$VERSION/fpm.d/*.conf`, but we will change this for [shared hosting purposes](../05_Shared_Hosting/01_Webhosting.md):
 

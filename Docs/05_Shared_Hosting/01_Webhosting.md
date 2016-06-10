@@ -8,7 +8,7 @@ We mostly use our Gentoo boxes for hosting multiple web projects / accounts simu
 |-- accounts
 |   |-- account1
 |   |   |-- fpm-5.6.conf
-|   |   |-- letsencrypt.ini
+|   |   |-- certbot.ini
 |   |   `-- vhost.conf
 |   `-- account2
 |       |-- fpm-7.0.conf
@@ -27,7 +27,7 @@ For each of the accounts there's also a directory below `/www/accounts` containi
 
 * `vhost.conf` contains the [Apache](../04_Software/05_Apache-PHP.md#installation) Virtual Host definition
 * `fpm-*.conf` contains the [PHP-FPM pool](../04_Software/05_Apache-PHP.md#php-pool-manager-configuration) definition. The filename decides which pool manager / PHP version to use. There may only be one pool definition per account.
-* `letsencrypt.ini` contains all information necessary for issuing [Let's Encrypt](../04_Software/06_Letsencrypt.md) certificates for this account.
+* `certbot.ini` contains all information necessary for issuing [Certbot](../04_Software/06_Certbot.md) certificates for this account.
 
 Apache Virtual Host (`vhost.conf`)
 ----------------------------------
@@ -133,10 +133,10 @@ useradd -g apache -s /bin/false account1
 ```
 
 
-Let's Encrypt configuration (`letsencrypt.ini`)
+Certbot configuration (`certbot.ini`)
 -----------------------------------------------
 
-The Let's Encrypt definition typically looks like this (of which only the first two lines need to be adapted for each account):
+The Certbot definition typically looks like this (of which only the first two lines need to be adapted for each account):
 
 ```ini
 domains = example.com, www.example.com
@@ -153,21 +153,21 @@ agree-tos = true
 Issuing a certificate is as easy as:
 
 ```sh
-letsencrypt -c /www/accounts/example/letsencrypt.ini certonly
+certbot -c /www/accounts/example/certbot.ini certonly
 /etc/init.d/apache2 reload
 ```
 
 For this to have any effect, please make sure that your Apache Virtual Host really defines an SSL container.
 
-A bash script `/usr/local/bin/letsencrypt-all` updating all certificates in a row (e.g. to be run by cron) could look like this:
+A bash script `/usr/local/bin/certbot-all` updating all certificates in a row (e.g. to be run by cron) could look like this:
 
 ```sh
 #!/bin/sh
 
-for letsencryptini in `find /www/accounts/* -name "letsencrypt.ini"`; do
-    account="`dirname $letsencryptini`";
-    echo "Let's encrypt \"`basename $account`\"!";
-    letsencrypt -c $letsencryptini certonly;
+for certbotini in `find /www/accounts/* -name "certbot.ini"`; do
+    account="`dirname $certbotini`";
+    echo "Certbot \"`basename $account`\"!";
+    certbot -c $certbotini certonly;
 done;
 
 /etc/init.d/apache2 reload;
@@ -176,5 +176,11 @@ done;
 A cronjob running this command once a month would look like this:
 
 ```sh
-0       0       1       *       *       /usr/local/bin/letsencrypt-all
+0       0       1       *       *       /usr/local/bin/certbot-all
+```
+
+Alternatively you can use the new `renew` command of Certbot:
+
+```sh
+0       0       1       *       *       /usr/bin/certbot renew
 ```
