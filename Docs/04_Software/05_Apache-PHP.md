@@ -30,7 +30,7 @@ dev-lang/php ~amd64
 Next, emerge Apache and PHP and prepare the document root:
 
 ```
-emerge apache mod_xml2enc php
+emerge apache mod_xml2enc mod_perl php
 cd /var/www
 rm -R *
 ln -s /www localhost
@@ -90,7 +90,14 @@ Listen 443
 # Listen [2001:4ba0:92e0:126::1]:80
 
 # Include virtual hosts
-Include /www/accounts/*/vhost.conf
+# Include /www/accounts/*/vhost.conf
+
+# Include virtual hosts managed by the tollwerk account administration (https://github.com/tollwerk/admin)
+<Perl>
+    foreach $file (glob '/www/accounts/*/config/vhosts-enabled/*/apache_vhost.conf') {
+        push @Include, $file;
+    }
+</Perl>
 ```
 
 Recent information about **recommended Cipher Suites** can be found at the [Mozilla Wiki](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_configurations).
