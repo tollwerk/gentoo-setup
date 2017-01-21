@@ -124,8 +124,32 @@ First, **configure the pool manager** by adapting its values in `/etc/php/fpm-ph
 error_log = /var/log/apache2/php-fpm-$VERSION.log
 events.mechanism = epoll
 emergency_restart_threshold = 0
-include=/www/accounts/*/fpm-$VERSION.conf
+include=/www/accounts/*/config/vhosts-enabled/*/fpm-$VERSION.conf
 ```
+
+Make sure there's a default (dummy) pool definition otherwise the service won't start at all if there's no single virtual host using it:
+
+```ini
+[dummy]
+listen = /var/run/php-fpm/dummy-$VERSION.sock
+listen.owner = apache
+listen.group = apache
+listen.mode = 0660
+user = apache
+group = apache
+pm = dynamic
+pm.start_servers = 3
+pm.max_children = 5
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
+```
+
+Create the directory for FPM socket descriptors:
+
+```sh
+mkdir /var/run/php-fpm
+```
+
 Create a version specific alias for the pool manager service, start it and add it to the default runlevel:
 
 ```sh

@@ -134,7 +134,7 @@ useradd -g apache -s /bin/false account1
 
 
 Certbot configuration (`certbot.ini`)
------------------------------------------------
+-------------------------------------
 
 The Certbot definition typically looks like this (of which only the first two lines need to be adapted for each account):
 
@@ -179,8 +179,9 @@ A cronjob running this command once a month would look like this:
 0       0       1       *       *       /usr/local/bin/certbot-all
 ```
 
-Alternatively you can use the new `renew` command of Certbot:
+**UPDATE**: Alternatively you can use the new `renew` command of Certbot:
 
 ```sh
 0       0       1       *       *       /usr/bin/certbot renew
 ```
+
