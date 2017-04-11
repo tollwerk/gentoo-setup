@@ -21,7 +21,7 @@ Prepare for and install the GRUB2 bootloader:
 ```sh
 mount /boot
 emerge grub
-grub2-install --grub-setup=/bin/true /dev/sda
+grub-install --grub-setup=/bin/true /dev/sda
 ```
 
 Now install the Kernel you [configured and compiled](02_Kernel.md#kernel) earlier:
@@ -35,7 +35,7 @@ Configure GRUB2 to recognize your kernel (repeat this step every time you add a 
 
 ```sh
 mount /boot
-grub2-mkconfig -o /boot/grub/grub.cfg
+grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 ___
