@@ -73,12 +73,20 @@ LoadModule xml2enc_module modules/mod_xml2enc.so
 
 # Security settings
 ServerTokens Minimal
-SSLProtocol All -SSLv2 -SSLv3
-SSLHonorCipherOrder On
-SSLCompression off
 Header add Strict-Transport-Security "max-age=15768000"
-# Strict-Transport-Security: "max-age=15768000 ; includeSubDomains"
-SSLCipherSuite ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256
+
+# Intermediate configuration (see https://mozilla.github.io/server-side-tls/ssl-config-generator/)
+SSLProtocol             all -SSLv3
+SSLCipherSuite          ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS
+SSLHonorCipherOrder     on
+SSLCompression          off
+SSLSessionTickets       off
+
+# OCSP Stapling, only in httpd 2.3.3 and later
+SSLUseStapling          on
+SSLStaplingResponderTimeout 5
+SSLStaplingReturnResponderErrors off
+SSLStaplingCache        shmcb:/var/run/ocsp(128000)
 
 # Shared hosting
 ServerName localhost
@@ -100,7 +108,7 @@ Listen 443
 </Perl>
 ```
 
-Recent information about **recommended Cipher Suites** can be found at the [Mozilla Wiki](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_configurations).
+Recent information about **recommended Cipher Suites** can be found at the [Mozilla Wiki](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_configurations). Please make sure to visit [https://mozilla.github.io/server-side-tls/ssl-config-generator/](https://mozilla.github.io/server-side-tls/ssl-config-generator/) to create the most appropriate set of SSL directives for your environment.
 
 **Start Apache** and add it to the default runlevel:
 
@@ -185,7 +193,7 @@ enable_dl = Off
 upload_max_filesize = 100M
 post_max_size = 100M
 allow_url_fopen = On
-allow_url_include = On
+allow_url_include = Off
 date.timezone = Europe/Berlin
 pcre.backtrack_limit = 1000000
 ```
