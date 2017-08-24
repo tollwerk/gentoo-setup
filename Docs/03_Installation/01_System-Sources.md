@@ -17,11 +17,11 @@ mount /dev/sdb1 /mnt/gentoo/www
 Download & extract sources
 --------------------------
 
-You should find the current Gentoo sources somewhere [here](http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/) or [here](http://distfiles.gentoo.org/releases/amd64/autobuilds/).
+You should find the current Gentoo sources somewhere [here](http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64/) (hardened sources are [not recommended / supported any longer as of August 2017](https://www.gentoo.org/support/news-items/2017-08-19-hardened-sources-removal.html)).
 
 ```sh
 cd /mnt/gentoo
-wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-20160428.tar.bz2
+wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20170817.tar.bz2
 tar xvjpf stage*.tar.bz2
 wget http://distfiles.gentoo.org/releases/snapshots/current/portage-latest.tar.bz2
 tar xvjf portage*.tar.bz2 -C /mnt/gentoo/usr
@@ -68,6 +68,12 @@ LINGUAS="de"
 #   euses and ufed - bug #478318
 PORTDIR="/usr/portage"
 PAX_MARKINGS="XT"
+```
+
+The `MAKEOPTS` option should be set to `<number of the server's cores> + 1`. Find out how many cores your server has by typing:
+
+```sh
+nproc
 ```
 
 Switch to the new installation
