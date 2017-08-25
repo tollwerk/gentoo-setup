@@ -9,7 +9,7 @@ Installation
 Begin by configuring Apache to use the Event MPM and particular modules in your `/etc/portage/make.conf`:
 
 ```sh
-APACHE2_MODULES="byrequests security cgi cgid actions alias auth_basic auth_digest authn_anon authn_dbd authn_dbm authn_core authz_core authn_default authn_file authz_dbm authz_default authz_groupfile authz_host authz_owner authz_user autoindex cache dav dav_fs dav_lock dbd deflate dir disk_cache env expires ext_filter file_cache filter headers http2 ident imagemap include info log_config logio mem_cache mime mime_magic mod_cgid mod_xml2enc negotiation proxy proxy_ajp proxy_balancer proxy_fcgi proxy_connect proxy_html proxy_http rewrite setenvif slotmem_shm so socache_shmcb speling status unique_id unixd userdir usertrack vhost_alias"
+APACHE2_MODULES="byrequests security cgi cgid actions alias auth_basic auth_digest authn_anon authn_dbd authn_dbm authn_core authz_core authn_default authn_file authz_dbm authz_default authz_groupfile authz_host authz_owner authz_user autoindex cache dav dav_fs dav_lock dbd deflate dir disk_cache env expires ext_filter file_cache filter headers http2 ident imagemap include info log_config logio mem_cache mime mime_magic mod_cgid mod_xml2enc negotiation proxy proxy_ajp proxy_balancer proxy_fcgi proxy_connect proxy_html proxy_http rewrite setenvif slotmem_shm so socache_shmcb speling status unique_id unixd userdir usertrack vhost_alias xml2enc"
 APACHE2_MPMS="event"
 ```
 
@@ -30,7 +30,7 @@ dev-lang/php ~amd64
 Next, emerge Apache and PHP and prepare the document root:
 
 ```
-emerge apache mod_xml2enc mod_perl php
+emerge apache mod_perl php
 cd /var/www
 rm -R *
 ln -s /www localhost
@@ -41,7 +41,7 @@ chown -R apache:apache /www
 Configure Apache to use enable SSL and PHP in `/etc/conf.d/apache2`:
 
 ```sh
-APACHE2_OPTS="-D SSL -D PROXY -D PHP -D HTTP2"
+APACHE2_OPTS="-D SSL -D PROXY -D PHP -D HTTP2 -D PERL"
 ```
 
 Ensure that `mod_cgid` is loaded instead of `mod_cgi` in `/etc/apache2/httpd.conf`:
@@ -66,10 +66,6 @@ As PHP is compiled without the `apache2` use flag, there won't be a configuratio
     </IfModule>
     DirectoryIndex index.php index.phtml
 </IfDefine>
-
-# xml2enc module
-LoadFile /usr/lib/libxml2.so
-LoadModule xml2enc_module modules/mod_xml2enc.so
 
 # Security settings
 ServerTokens Minimal

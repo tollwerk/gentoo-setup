@@ -46,13 +46,19 @@ CCACHE_SIZE="2G"
 CCACHE_DIR="/tmp/ccache"
 LINGUAS="de"
 GENTOO_MIRRORS="ftp://ftp.tu-clausthal.de/pub/linux/gentoo ftp://ftp.uni-erlangen.de/pub/mirrors/gentoo ftp://ftp.tu-clausthal.de/pub/linux/gentoo"
-USE="authlib bcmath bindist bzip2 cgi corefonts ctype curl encode exif ffmpeg
-     filter ftp gd geoip gif hash imap inifile intl ipv6 jpeg jpeg2k json lcms
-     mhash mmap mp3 mysql mysqli network nss pcntl pdo pic png posix
-     postscript python sasl simplexml smtp soap sockets spell sqlite ssse3 svg
-     symlink sysvipc tiff tokenizer truetype unicode userlocales x264 xattr
-     xml xmlreader xmlrpc xmlwriter xsl xslt zip -dri -fortran -xorg"
-APACHE2_MODULES="byrequests security cgi cgid actions alias auth_basic auth_digest authn_anon authn_dbd authn_dbm authn_core authz_core authn_default authn_file authz_dbm authz_default authz_groupfile authz_host authz_owner authz_user autoindex cache dav dav_fs dav_lock dbd deflate dir disk_cache env expires ext_filter file_cache filter headers http2 ident imagemap include info log_config logio mem_cache mime mime_magic mod_cgid mod_xml2enc negotiation proxy proxy_ajp proxy_balancer proxy_fcgi proxy_connect proxy_html proxy_http rewrite setenvif slotmem_shm so socache_shmcb speling status unique_id unixd userdir usertrack vhost_alias"
+USE="acpi apm authdaemond authlib bash-completion bcmath bzip2 bzlib cairo
+     cdio chroot corefonts ctype curl dso ecc emacs erandom exif fastcgi
+     filter fontconfig ftp gcc-libffi gd gd-external geoip gif gs hardened
+     hash idea imap inifile intl ithreads jai java java-external jikes jpeg
+     jpeg2k jpgraph json kerberos lcms libwww lzw memlimit mhash mime mmap
+     mysql mysqli nagios-ping nagios-ssh no-old-linux nojoystick openssh
+     openssl pcntl pcre pdo perl php pic pie png posix sasl session
+simplexml
+     soap sockets source sqlite subversion suidcheck svg svgz symlink
+sysvipc
+     szip threads tiff tokenizer truetype ttcp ucs2 unicode urandom
+     userlocales vchroot webdav winbind xml xmlreader xmlrpc xmlwriter xsl
+     xslt zip -cups -midi"
 APACHE2_MPMS="event"
 STAGE1_USE="gcc64"
 ACCEPT_LICENSE="*"
