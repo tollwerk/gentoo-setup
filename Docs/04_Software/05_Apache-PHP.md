@@ -41,7 +41,21 @@ chown -R apache:apache /www
 Configure Apache to use enable SSL and PHP in `/etc/conf.d/apache2`:
 
 ```sh
-APACHE2_OPTS="-D SSL -D PROXY -D PHP -D HTTP2 -D PERL"
+APACHE2_OPTS="-D SSL -D PROXY -D PHP -D HTTP2 -D PERL -D DEFAULT_VHOST -D SSL_DEFAULT_VHOST"
+```
+
+Add a default virtual host definition `/etc/apache2/vhosts.d/default_vhost.include` to control the request fallback behaviour:
+
+```sh
+ServerAdmin root@localhost
+DocumentRoot "/var/www/localhost/htdocs"
+
+<Directory "/var/www/localhost/htdocs">
+        AllowOverride None
+        Require all denied
+        Options None
+        ErrorDocument 403 Forbidden
+</Directory>
 ```
 
 Ensure that `mod_cgid` is loaded instead of `mod_cgi` in `/etc/apache2/httpd.conf`:
@@ -72,8 +86,8 @@ ServerTokens Minimal
 Header add Strict-Transport-Security "max-age=15768000"
 
 # Intermediate configuration (see https://mozilla.github.io/server-side-tls/ssl-config-generator/)
-SSLProtocol             all -SSLv3
-SSLCipherSuite          ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS
+SSLProtocol             ALL -SSLv2 -SSLv3
+SSLCipherSuite          HIGH:!kRSA:!aNULL:!MD5:!RC4
 SSLHonorCipherOrder     on
 SSLCompression          off
 SSLSessionTickets       off
