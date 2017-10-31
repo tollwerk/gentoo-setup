@@ -185,3 +185,22 @@ A cronjob running this command once a month would look like this:
 0       0       1       *       *       /usr/bin/certbot renew
 ```
 
+Logrotate settings
+------------------
+
+Add the following script to `/etc/logrotate.d/accounts` to let `logrotate` take care of your account logs:
+
+```bash
+# Accounts logrotate snippet for Gentoo Linux
+#
+/www/accounts/*/log/*log {
+  su root account
+  copytruncate
+  missingok
+  notifempty
+  sharedscripts
+  postrotate
+  /etc/init.d/apache2 reload > /dev/null 2>&1 || true
+  endscript
+}
+```

@@ -5,7 +5,7 @@ Partition table
 ---------------
 
 If you haven't [done so already](../02_Hard-Drives.md#partition-preparations), it's finally time to create your `/etc/fstab` with about this content:
- 
+
 ```sh
 /dev/sda1               /boot           ext2            noauto,noatime                  1 1
 /dev/sda2               none            swap            sw                              0 0
@@ -49,7 +49,7 @@ More config work ...
 **Set your hostname** and add the service to the default runlevel:
 
 ```sh
-nano /etc /conf.d/hostname
+nano /etc/conf.d/hostname
 # ...
 rc-update add hostname default
 ```
@@ -83,7 +83,7 @@ nano /etc/locale.gen
 ```
 
 **Configure SSH** by editing `/etc/ssh/sshd_config` to temporarily allow root logins with regular passwords but don't forget to change this later as it might introduce weak security.
- 
+
 ```sh
 PermitRootLogin yes
 ```
