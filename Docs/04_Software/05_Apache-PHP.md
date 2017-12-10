@@ -142,7 +142,7 @@ First, **configure the pool manager** by adapting its values in `/etc/php/fpm-ph
 
 ```ini
 [global]
-error_log = /var/log/apache2/php-fpm-$VERSION.log
+error_log = /var/log/php/php-fpm-$VERSION.log
 events.mechanism = epoll
 emergency_restart_threshold = 0
 include=/www/accounts/*/config/vhosts-enabled/*/fpm-$VERSION.conf
@@ -159,16 +159,18 @@ listen.mode = 0660
 user = apache
 group = apache
 pm = dynamic
-pm.start_servers = 3
-pm.max_children = 5
+pm.start_servers = 1
+pm.max_children = 1
 pm.min_spare_servers = 1
-pm.max_spare_servers = 3
+pm.max_spare_servers = 1
 ```
 
-Create the directory for FPM socket descriptors:
+Please change the `listen.group` and `group` parameters to `"account"` in case you're using the [tollwerk Account Administration](https://github.com/tollwerk/admin).
+
+Create the directory for FPM socket descriptors and log files:
 
 ```sh
-mkdir /var/run/php-fpm
+mkdir /var/run/php-fpm /var/log/php
 ```
 
 Create a version specific alias for the pool manager service, start it and add it to the default runlevel:
@@ -193,14 +195,14 @@ As with the pool manager each version of PHP has to be configured separately via
 
 ```ini
 short_open_tag = Off
-realpath_cache_size = 1M
+realpath_cache_size = 4M
 expose_php = Off
 max_execution_time = 240
 max_input_vars = 1500
 memory_limit = 512M
 display_errors = Off
 log_errors = On
-error_log = /var/log/apache2/php_$VERSION_log
+error_log = /var/log/php/php_$VERSION_log
 default_charset = "utf-8"
 enable_dl = Off
 upload_max_filesize = 100M
