@@ -103,6 +103,9 @@ ServerName localhost
 Listen 80
 Listen 443
 
+# Enable HTTP/2
+Protocols h2 http/1.1
+
 # For IPv6 usage this would look more like this
 # Listen 80.84.220.126:80
 # Listen [2001:4ba0:92e0:126::1]:80
