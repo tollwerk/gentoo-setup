@@ -194,21 +194,15 @@ PHP configuration
 As with the pool manager each version of PHP has to be configured separately via `/etc/php/fpm-php$VERSION/php.ini`:
 
 ```ini
-short_open_tag = Off
 realpath_cache_size = 4M
 expose_php = Off
 max_execution_time = 240
 max_input_vars = 1500
 memory_limit = 512M
 display_errors = Off
-log_errors = On
 error_log = /var/log/php/php_$VERSION_log
-default_charset = "utf-8"
-enable_dl = Off
 upload_max_filesize = 100M
 post_max_size = 100M
-allow_url_fopen = On
-allow_url_include = Off
 date.timezone = Europe/Berlin
 pcre.backtrack_limit = 1000000
 ```
