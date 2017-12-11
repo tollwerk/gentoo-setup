@@ -94,5 +94,13 @@ Finally, make sure SSH has been added to the default runlevel to fire up on each
 rc-update add sshd default
 ```
 
+Create a root user SSH key
+--------------------------
+
+```sh
+mkdir ~/.ssh
+cd ~/.ssh
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/root@example.com_rsa
+```
 ___
 We'll now finish our setup by [installing some basic packages](04_Basic-Software.md) before booting into our new system for the first time.
