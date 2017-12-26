@@ -1,6 +1,16 @@
 Basic software
 ==============
 
+Boot services
+-------------
+
+Create temporary files and directories during the boot process:
+
+```sh
+rc-update add opentmpfiles-dev sysinit
+rc-update add opentmpfiles-setup boot
+```
+
 Useful tools
 ------------
 
