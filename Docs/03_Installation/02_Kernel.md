@@ -26,10 +26,10 @@ emerge ccache ufed
 Kernel
 ------
 
-Emerge the **Kernel sources** and **linux headers**, configure the Kernel according to your hardware and other needs and finally build it:
+Emerge the **Kernel sources** and **linux firmware**, configure the Kernel according to your hardware and other needs and finally build it:
 
 ```sh
-USE="-doc symlink" emerge gentoo-sources
+USE="-doc symlink" emerge gentoo-sources linux-firmware
 cd /usr/src/linux
 make menuconfig
 make clean && make
