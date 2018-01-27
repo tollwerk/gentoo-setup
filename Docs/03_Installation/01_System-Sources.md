@@ -94,7 +94,7 @@ mount -t proc none /mnt/gentoo/proc
 Copy over the network interface configuration (and DNS server info
 
 ```sh
-cp /etc/conf.d/net /mnt/gentoo/conf.d/net
+cp /etc/conf.d/net /mnt/gentoo/etc/conf.d/net
 cp /etc/resolv.conf /mnt/gentoo/etc
 ```
 
