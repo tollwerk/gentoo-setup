@@ -183,7 +183,7 @@ log_path = /var/log/dovecot.log
 #info_log_path = /var/log/dovecot-info.log
 ```
 
-For every mail domain you want to serve, create a matching SSL certificat via `certbot` add a section like this:
+For every mail domain you want to serve, create a matching SSL certificate via `certbot` add a section like this:
 
 ```
 local_name mail.somedomain.com {
