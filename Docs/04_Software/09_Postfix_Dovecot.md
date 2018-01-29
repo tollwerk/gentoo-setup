@@ -196,13 +196,13 @@ If you're planning to migrate emails from another (IMAP) server, add this to the
 
 ```
 # Migration from Golem
-imapc_host = 80.82.223.126
+imapc_host = 123.123.123.123
 
 # Authenticate as masteruser / masteruser-secret, but use a separate login user.
 # If you don't have a master user, remove the imapc_master_user setting.
 imapc_user = %u
 #imapc_master_user = masteruser
-imapc_password = "0LIMv?7&"
+imapc_password = "seCr3T"
 
 imapc_features = rfc822.size
 imapc_features = $imapc_features fetch-headers
