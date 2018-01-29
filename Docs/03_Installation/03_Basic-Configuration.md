@@ -46,7 +46,7 @@ rc-update add net.enp9s0 default
 More config work ...
 --------------------
 
-**Set your hostname** and add the service to the default runlevel:
+**Set your hostname** to a **fully qualified domain name** and add the service to the default runlevel:
 
 ```sh
 nano /etc/conf.d/hostname
@@ -54,11 +54,11 @@ nano /etc/conf.d/hostname
 rc-update add hostname default
 ```
 
-Add your hostname to `/etc/hosts` (replace `$host` with the name you defined `/etc/hostname`):
+Add your hostname to `/etc/hosts` (replace `$host` with the **fully qualified domain name** you defined in `/etc/hostname` and optionally add a short `$alias`):
 
 ```sh
 127.0.0.1       localhost
-80.84.220.126   $host.example.com
+80.84.220.126   $host   $alias
 ::1             localhost
 ```
 

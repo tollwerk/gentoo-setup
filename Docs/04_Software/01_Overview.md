@@ -9,3 +9,4 @@ Depending on your needs, you will want to install particular software packages o
 4. [Apache / PHP](05_Apache-PHP.md) with Event MPM, HTTP2, PHP-FPM and PHP 7
 5. [Certbot](06_Certbot.md)
 6. [phpMyAdmin](07_phpMyAdmin.md)
+7. [Postfix](08_Postfix.md)

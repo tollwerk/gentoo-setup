@@ -32,3 +32,6 @@ DocumentRoot "/www/htdocs/phpmyadmin"
         Require all granted
 </Directory>
 ```
+
+___
+[Back to Overview](01_Overview.md)

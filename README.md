@@ -17,5 +17,6 @@ This documentation walks you through the steps we usually take for setting up a 
     4. [Apache / PHP](Docs/04_Software/05_Apache-PHP.md) with Event MPM, HTTP2, PHP-FPM and PHP 7
     5. [Certbot](Docs/04_Software/06_Certbot.md)
     6. [phpMyAdmin](Docs/04_Software/07_phpMyAdmin.md)
+    7. [Postfix](Docs/04_Software/08_Postfix.md)
 5. Shared hosting
     1. [Webhosting Setup](Docs/05_Shared_Hosting/01_Webhosting.md)
